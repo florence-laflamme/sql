@@ -33,7 +33,7 @@ Limit to 25 rows of output. */
 --QUERY 3
 
 SELECT * FROM customer_purchases
-WHERE product_id = 4 OR 9
+WHERE product_id = 4 OR product_id = 9
 LIMIT 25
 
 
@@ -50,9 +50,8 @@ Limit to 25 rows of output.
 */
 --QUERY 4
 
-SELECT * FROM customer_purchases
-WHERE customer_id = 8 BETWEEN 10
-SELECT quantity * cost_per_quantity AS price
+SELECT *, quantity * cost_per_quantity AS price FROM customer_purchases
+WHERE customer_id BETWEEN 8 AND 10
 LIMIT 25
 
 
@@ -66,12 +65,13 @@ columns and add a column called prod_qty_type_condensed that displays the word �
 if the product_qty_type is “unit,” and otherwise displays the word “bulk.” */
 --QUERY 5
 
-SELECT product_id, product_name, product_qty_type FROM product
-CASE
-	WHEN product_qty_type = 'unit'
-		THEN 'unit'
-	ELSE 'bulk'
-END AS 'prod_qty_type_condensed'
+SELECT product_id, product_name, product_qty_type 
+	CASE
+		WHEN product_qty_type = 'unit'
+			THEN 'unit'
+		ELSE 'bulk'
+	END AS 'prod_qty_type_condensed'
+FROM product
 
 
 --END QUERY
@@ -82,17 +82,18 @@ add a column to the previous query called pepper_flag that outputs a 1 if the pr
 contains the word “pepper” (regardless of capitalization), and otherwise outputs 0. */
 --QUERY 6
 
-SELECT product_id, product_name, product_qty_type FROM product
-CASE
-	WHEN product_qty_type = 'unit'
-		THEN 'unit'
-	ELSE 'bulk'
-END AS 'prod_qty_type_condensed'
-CASE
-	WHEN product_name LIKE '%pepper%'
-		THEN 1
-	ELSE 0
-END AS 'pepper_flag'
+SELECT product_id, product_name, product_qty_type 
+	CASE
+		WHEN product_qty_type = 'unit'
+			THEN 'unit'
+		ELSE 'bulk'
+	END AS 'prod_qty_type_condensed'
+	CASE
+		WHEN product_name LIKE '%pepper%'
+				THEN 1
+		ELSE 0
+	END AS 'pepper_flag'
+FROM product
 
 
 --END QUERY
@@ -105,8 +106,8 @@ Limit to 24 rows of output. */
 --QUERY 7
 
 SELECT * FROM vendor
-INNER JOIN vendor_booth_assignment
-ON vendor.vendor_id = vendor_booth_assignment.vendor_id
+INNER JOIN vendor_booth_assignments
+ON vendor.vendor_id = vendor_booth_assignments.vendor_id
 ORDER BY market_date, vendor_name
 LIMIT 24
 
@@ -124,8 +125,8 @@ at the farmer’s market by counting the vendor booth assignments per vendor_id.
 --QUERY 8
 
 SELECT * FROM vendor
-INNER JOIN vendor_booth_assignment
-ON vendor.vendor_id = vendor_booth_assignment.vendor_id
+INNER JOIN vendor_booth_assignments
+ON vendor.vendor_id = vendor_booth_assignments.vendor_id
 COUNT(GROUP BY vendor_id)
 
 
