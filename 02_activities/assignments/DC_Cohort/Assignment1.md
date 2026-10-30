@@ -209,5 +209,8 @@ Consider, for example, concepts of fariness, inequality, social structures, marg
 
 
 ```
-Your thoughts...
+My first impression when reading the article was that it really illustrates why building teams with individuals coming from a variety of perspectives is important, even for seemingly technical projects. In this case, building a database of family records may look harmless and simple to most; many may not question, even for a second, that a family can be something different than a married couple having children. Even in good faith and with an open mind, it is difficult to think outside of our own realities. Having a diverse team may help in offsetting this, by bringing a wider range of experience to the table. Of course, for this to have any effect, these (possibly discording) voices should be listened to. 
+
+Another reflexion I had while reading the article was how potent technology is at reinforcing oppressive structures. The database did not create the social expectation that a good Pakistani family was made of married parents born in Pakistan, or that an individual is either male or female, but it made not complying to it much more difficult. For those who refuse or are unable to abide by the standard, there are dire consequences: not being recognised by the state means that one cannot vote, drive, access public services, or leave the country. The combination of technology with a powerful state means that the cost of not being recognised by the government is high, and that it is nearly impossible to get around the requirements set by the state. 
+
 ```
