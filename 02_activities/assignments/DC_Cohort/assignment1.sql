@@ -206,14 +206,13 @@ but remember, STRFTIME returns a STRING for your WHERE statement...
 AND be sure you remove the LIMIT from the previous query before aggregating!! */
 --QUERY 12
 
-
-SELECT * FROM customer_purchases
-SELECT STRFTIME('%M', market_date) AS month
-SELECT STRFTIME('%Y', market_date) AS year
+SELECT customer_id, market_date,
+STRFTIME('%m', market_date) AS month,
+STRFTIME('%Y', market_date) AS year,
+SUM(quantity*cost_per_quantity) AS total_spent
+FROM customer_purchases
 GROUP BY customer_id
 HAVING month = '04' AND year = '2022'
-SUM(quantity*cost_per_quantity) AS price
-
 
 
 --END QUERY
