@@ -82,16 +82,16 @@ contains the word “pepper” (regardless of capitalization), and otherwise out
 --QUERY 6
 
 SELECT product_id, product_name, product_qty_type 
-	CASE
+,CASE
 		WHEN product_qty_type = 'unit'
-			THEN 'unit'
+		THEN 'unit'
 		ELSE 'bulk'
-	END AS 'prod_qty_type_condensed'
-	CASE
+		END AS 'prod_qty_type_condensed'
+,CASE
 		WHEN product_name LIKE '%pepper%'
-				THEN 1
+		THEN 1
 		ELSE 0
-	END AS 'pepper_flag'
+		END AS 'pepper_flag'
 FROM product
 
 
@@ -123,10 +123,11 @@ LIMIT 24
 at the farmer’s market by counting the vendor booth assignments per vendor_id. */
 --QUERY 8
 
-SELECT * FROM vendor
-INNER JOIN vendor_booth_assignments
-ON vendor.vendor_id = vendor_booth_assignments.vendor_id
-COUNT(GROUP BY vendor_id)
+SELECT vendor_id
+,COUNT(booth_number) as nb_of_booths
+FROM vendor_booth_assignments
+
+GROUP BY vendor_id
 
 
 
@@ -141,13 +142,14 @@ HINT: This query requires you to join two tables, use an aggregate function, and
 --QUERY 9
 
 
-SELECT * FROM customer
+SELECT *
+, SUM(quantity*cost_per_quantity) AS total_spent
+FROM customer
 INNER JOIN customer_purchases
 ON customer.customer_id = customer_purchases.customer_id
-GROUP BY customer_id
-SUM(quantity*cost_per_quantity) AS total_spent
+GROUP BY customer.customer_id
 HAVING total_spent > 2000
-ORDER BY last_name, first_name
+ORDER BY customer_last_name, customer_first_name
 
 --END QUERY
 
@@ -164,8 +166,15 @@ When inserting the new vendor, you need to appropriately align the columns to be
 VALUES(col1,col2,col3,col4,col5) 
 */
 --QUERY 10
-SELECT * FROM vendor INTO temp.new_vendor
-VALUES(10, 'Thomass Superfood Store', 'Fresh Focused', 'Thomas', 'Rosenthal')
+DROP TABLE IF EXISTS temp.new_vendor;
+
+CREATE TABLE temp.new_vendor AS
+
+SELECT *FROM vendor;
+
+
+INSERT INTO temp.new_vendor VALUES(10, 'Thomass Superfood Store', 'Fresh Focused', 'Thomas', 'Rosenthal');
+SELECT *FROM temp.new_vendor;
 
 --END QUERY
 
@@ -179,9 +188,10 @@ Limit to 25 rows of output. */
 --QUERY 11
 
 
-SELECT customer_id, market_date FROM customer_purchases
-SELECT STRFTIME('%M', market_date) AS month
-SELECT STRFTIME('%Y', market_date) AS year
+SELECT customer_id, market_date,
+STRFTIME('%m', market_date) AS month,
+STRFTIME('%Y', market_date) AS year
+FROM customer_purchases
 LIMIT 25 
 
 --END QUERY
