@@ -64,12 +64,11 @@ Using the product table, write a query that outputs the product_id and product_n
 columns and add a column called prod_qty_type_condensed that displays the word “unit” 
 if the product_qty_type is “unit,” and otherwise displays the word “bulk.” */
 --QUERY 5
-
+	
 SELECT product_id, product_name, product_qty_type 
-	CASE
-		WHEN product_qty_type = 'unit'
-			THEN 'unit'
-		ELSE 'bulk'
+, CASE WHEN product_qty_type = 'unit'
+	THEN 'unit'
+	ELSE 'bulk'
 	END AS 'prod_qty_type_condensed'
 FROM product
 
