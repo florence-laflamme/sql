@@ -57,7 +57,7 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+There are different ways of thinking about this problem. One way of solving it would be using a type 1 database, where changes are overwritten. This table would more simple to create, with straightforward columns such as customer_id, street, number, city, zip code, etc. Another way would be using a type 2 database, where all changes are preserved. This would be slightly more complicated to implement, as it would require additional columns to ensure that we can clearly identify the current address. 
 ```
 
 ***
