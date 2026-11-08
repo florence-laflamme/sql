@@ -151,6 +151,7 @@ SELECT *
 FROM day_sales_table
 WHERE day_sales = (SELECT MAX(day_sales) FROM day_sales_table)
 OR day_sales = (SELECT MIN(day_sales) FROM day_sales_table)
+GROUP BY market_date
 
 
 --END QUERY
