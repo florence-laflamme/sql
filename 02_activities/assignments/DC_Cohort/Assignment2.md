@@ -57,7 +57,7 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+There are different ways of thinking about this problem. One way of solving it would be using a type 1 database, where changes are overwritten. This table would more simple to create, with straightforward columns such as customer_id, street, number, city, zip code, etc. Another way would be using a type 2 database, where all changes are preserved. This would be slightly more complicated to implement, as it would require additional columns to ensure that we can clearly identify the current address. 
 ```
 
 ***
@@ -193,5 +193,5 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
+I think that this article illustrates well how little we (the general public) know about the social impact of new technologies. The article emphasises how workers in developing countries are used to build training datasets for neural nets, but plenty of other examples come to mind. With the proliferation of LLMs, the number of data centres needed by companies is exploding. These data centres require large amounts of electricity and water to operate, creating considerable pressure on the communities hosting them. These communities are often torn by conflict, as some members see these data centres as economic opportunities, but others are worried by their environmental and social impacts. Technologies also require large quantities of mineral to operate. These minerals are often mined in war-torn countries with little legal oversight, such as Congo. Vulnerable populations, often including children, are exploited in extremely dangerous and inhumane conditions. Nevertheless, the impact of technologies on the workers involved is almost never present in the public debate. I think that we should start to consider the impacts of new technologies with a more holistic view, looking at how each step of the supply chain affects the society and the environment. Although there has been considerable public attention directed towards the impact of social media on the youth and on social relations in general, and the impact of AI on higher education, there is only little public attention given to the other forms of impact that technology may have. We need to start thinking beyond the most obvious and nearby issues, and start digging into the other forms of exploitation needed to enable new technologies. 
 ```
