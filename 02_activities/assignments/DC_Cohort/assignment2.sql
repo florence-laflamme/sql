@@ -261,7 +261,28 @@ Finally, make sure you have a WHERE statement to update the right row,
 When you have all of these components, you can run the update statement. */
 --QUERY 12
 
+DROP TABLE IF EXISTS TEMP.last_inventory;
+CREATE TABLE TEMP.last_inventory AS
+SELECT *
+,dense_rank() OVER(PARTITION BY product_id ORDER BY market_date DESC) as last_product
+ FROM vendor_inventory
+ORDER BY market_date;
+SELECT *
+FROM product_units
+LEFT JOIN last_inventory
+    ON last_inventory.product_id = product_units.product_id
+    AND last_inventory.last_product = 1;
 
+UPDATE product_units
+SET current_quantity = COALESCE(
+    (
+        SELECT last_inventory.quantity
+        FROM last_inventory
+        WHERE last_inventory.product_id = product_units.product_id
+          AND last_inventory.last_product = 1
+    ),
+    0
+);
 
 
 --END QUERY
