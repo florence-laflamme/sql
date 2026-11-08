@@ -147,11 +147,8 @@ SELECT *
 , SUM(quantity * cost_per_quantity) OVER(PARTITION BY market_date) AS day_sales 
 FROM customer_purchases;
 
-SELECT *
-FROM day_sales_table
-WHERE day_sales = (SELECT MAX(day_sales) FROM day_sales_table)
-OR day_sales = (SELECT MIN(day_sales) FROM day_sales_table)
-GROUP BY market_date
+SELECT MAX(day_sales) FROM day_sales_table
+UNION SELECT MIN(day_sales) FROM day_sales_table
 
 
 --END QUERY
