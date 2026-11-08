@@ -224,13 +224,6 @@ WHERE product_qty_type = 'unit';
 This can be any product you desire (e.g. add another record for Apple Pie). */
 --QUERY 10
 
-
-DROP TABLE IF EXISTS product_units;
-CREATE TABLE product_units AS
-SELECT * 
-,CURRENT_TIMESTAMP AS snapshot_timestamp
-FROM product
-WHERE product_qty_type = 'unit';
 INSERT INTO product_units
 VALUES(24, 'Pecan pie', 'small', 3, 'unit', CURRENT_TIMESTAMP)
 
