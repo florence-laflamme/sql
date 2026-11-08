@@ -141,14 +141,14 @@ HINT: There are a possibly a few ways to do this query, but if you're struggling
 with a UNION binding them. */
 --QUERY 7
 
-DROP TABLE IF EXISTS TEMP.day_sales_table;
-CREATE TABLE TEMP.day_sales_table AS
 SELECT *
-, SUM(quantity * cost_per_quantity) OVER(PARTITION BY market_date) AS day_sales 
-FROM customer_purchases;
+FROM day_sales_table
+WHERE day_sales = (SELECT MAX(day_sales) FROM day_sales_table)
+UNION 
+SELECT *
+FROM day_sales_table
+WHERE day_sales = (SELECT MIN(day_sales) FROM day_sales_table);
 
-SELECT MAX(day_sales) FROM day_sales_table
-UNION SELECT MIN(day_sales) FROM day_sales_table
 
 
 --END QUERY
