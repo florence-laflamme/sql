@@ -236,13 +236,6 @@ VALUES(24, 'Pecan pie', 'small', 3, 'unit', CURRENT_TIMESTAMP)
 HINT: If you don't specify a WHERE clause, you are going to have a bad time.*/
 --QUERY 11
 
-CREATE TABLE product_units AS
-SELECT * 
-,CURRENT_TIMESTAMP AS snapshot_timestamp
-FROM product
-WHERE product_qty_type = 'unit';
-INSERT INTO product_units
-VALUES(24, 'Pecan pie', 'small', 3, 'unit', CURRENT_TIMESTAMP);
 DELETE FROM product_units
 WHERE product_id = 24;
 
