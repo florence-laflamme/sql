@@ -261,6 +261,8 @@ Finally, make sure you have a WHERE statement to update the right row,
 When you have all of these components, you can run the update statement. */
 --QUERY 12
 
+ALTER TABLE product_units
+ADD current_quantity INT;
 DROP TABLE IF EXISTS TEMP.last_inventory;
 CREATE TABLE TEMP.last_inventory AS
 SELECT *
